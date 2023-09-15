@@ -1,3 +1,13 @@
+assets/
+custom_assets/assets/*
+custom_assets/assets_processed
+custom_assets/prod_assets_jpgs
+
+datasets/
+logs/
+lego.mp4
+projects/neuralangelo/configs/custom/*
+
 checkpoints
 
 # Other uncheckable file types

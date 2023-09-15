@@ -10,7 +10,7 @@
 
 logging_iter: 9999999999999  # disable the printing logger
 
-max_iter: 500000
+max_iter: 50000 # 0
 
 wandb_scalar_iter: 100
 wandb_image_iter: 10000
@@ -18,7 +18,7 @@ validation_iter: 5000
 speed_benchmark: False
 
 checkpoint:
-    save_iter: 20000
+    save_iter: 10000 # 20000
 
 trainer:
     type: projects.neuralangelo.trainer
@@ -56,7 +56,7 @@ model:
                 hashgrid:
                     min_logres: 5
                     max_logres: 11
-                    dict_size: 22
+                    dict_size: 21 # 22
                     dim: 8
                     range: [-2,2]
                 coarse2fine:
@@ -135,12 +135,12 @@ data:
     num_images:  # The number of training images.
     train:
         image_size: [800,800]
-        batch_size: 2
+        batch_size: 1 # 2
         subset:
     val:
-        image_size: [400,400]
-        batch_size: 2
-        subset: 4
+        image_size: [200,200] # [400, 400]
+        batch_size: 1 # 2
+        subset: 1 # 4
         max_viz_samples: 16
     readjust:
         center: [0.,0.,0.]

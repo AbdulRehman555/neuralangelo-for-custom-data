@@ -1,10 +1,8 @@
-# docker build -f docker/Dockerfile-colmap -t chenhsuanlin/colmap:3.8 .
-# docker push chenhsuanlin/colmap:3.8
-
-FROM nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04
+# Use the PyTorch base image as it likely includes CUDA
+FROM nvcr.io/nvidia/pytorch:23.04-py3
 ARG DEBIAN_FRONTEND=noninteractive
 
-# colmap dependencies
+# Install dependencies from both Dockerfiles
 RUN apt-get update && apt-get install -y \
     git \
     cmake \
@@ -26,19 +24,24 @@ RUN apt-get update && apt-get install -y \
     qtbase5-dev \
     libqt5opengl5-dev \
     libcgal-dev \
-    libceres-dev
-# headless servers
-RUN apt-get update && apt-get install -y \
-    xvfb
-# Colmap
+    libceres-dev \
+    xvfb \
+    bzip2 \
+    ca-certificates \
+    curl \
+    libx264-dev \
+    tmux \
+    wget \
+    pip \
+    ffmpeg
+
+# Install Colmap
 RUN git clone https://github.com/colmap/colmap.git && cd colmap && git checkout 3.8
 RUN cd colmap && mkdir build && cd build && cmake .. -DCUDA_ENABLED=ON -DCMAKE_CUDA_ARCHITECTURES="70;72;75;80;86" -GNinja
 RUN cd colmap/build && ninja && ninja install
 
-# additional python packages
-RUN apt-get update && apt-get install -y \
-    pip \
-    ffmpeg
+# Install Python packages
+RUN pip install --upgrade pip
 RUN pip install \
     addict \
     k3d \
@@ -47,3 +50,11 @@ RUN pip install \
     plotly \
     pyyaml \
     trimesh \
+    flake8 \
+    pre-commit
+
+# Install Python libraries for Imaginaire
+COPY requirements.txt requirements.txt
+ARG FORCE_CUDA=1
+ARG TCNN_CUDA_ARCHITECTURES=70,72,75,80,86
+RUN pip install --upgrade -r requirements.txt
