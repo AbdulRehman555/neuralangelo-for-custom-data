@@ -22,13 +22,21 @@ sudo docker run --gpus all --shm-size=32G -it -v {source folder path}:{destinati
 pip install heif-convert
 ``` 
 ## Step 2: Data Preparation
+* Install third party submodules inside the colmap container:
+```git submodule update --init --recursive```
+* OPTIONAL (If above command is not executed successfully):
+```
+git config --global --add safe.directory /{destination folder path}
+git config --global --add safe.directory /{destination folder path}/third_party/colmap
+```
+
 * Place your custom data (assets) in the ‘custom_assets/assets’ folder.
 ```
 mkdir -p custom_assets/assets
 ```
 * Prepare data (In the colmap container):
 ```
-bash process_all_assets.sh preparation
+bash process_all_assests.sh preparation
 ```
 * Note that this bash script will traverse the ‘custom_assets/assets’ directory, goes through the each asset folder and perform data preparation step.
 * You can specify the format of custom data images by setting the IMAGE_FORMAT variable inside the process_all_assets.sh.
@@ -43,7 +51,7 @@ bash process_all_assets.sh training
 ## Step 4: Mesh Extraction
 * Extract meshes for all the trained assets (In the neuralangelo container):
 ```
-bash process_all_assets.sh extraction
+bash process_all_assests.sh extraction
 ```
 
 
