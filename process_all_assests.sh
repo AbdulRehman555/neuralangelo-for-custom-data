@@ -6,7 +6,7 @@ RESOLUTION=1024
 BLOCK_RES=128
 
 PARENT_DIRECTORY="custom_assets/assets"
-IMAGE_FORMAT="heif"
+IMAGE_FORMAT="heif" # OPTIONS: 'jpg', 'heif'
 
 for folder in "$PARENT_DIRECTORY"/*; do
         if [ -d "$folder" ]; then
