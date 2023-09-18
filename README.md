@@ -23,8 +23,13 @@ pip install heif-convert
 ``` 
 ## Step 2: Data Preparation
 * Install third party submodules inside the colmap container:
-```git submodule update --init --recursive```
-* OPTIONAL (If above command is not executed successfully):
+
+```
+git submodule update --init --recursive
+```
+
+* Optional (If the above command is not executed successfully due to some git issues):
+
 ```
 git config --global --add safe.directory /{destination folder path}
 git config --global --add safe.directory /{destination folder path}/third_party/colmap
