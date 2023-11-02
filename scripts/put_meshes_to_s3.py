@@ -27,11 +27,11 @@ def copy_ply_files(src_dir, dest_dir):
                 
                 
 # Usage
-source_dir = '../logs'  # replace with your source directory
+source_dir = 'logs'  # replace with your source directory
 bucket_name = 'redbuffer-quixel'  # replace with your bucket name
 target_folder = 'meshes'  # replace with your target folder in the bucket
 
-dest_dir = "../projects/neuralangelo/scripts/meshes/neuralangelo_meshes"
+dest_dir = "projects/neuralangelo/scripts/meshes/neuralangelo_meshes"
 copy_ply_files(source_dir, dest_dir)
                       
 # upload_ply_files_to_s3(source_dir, bucket_name, target_folder)

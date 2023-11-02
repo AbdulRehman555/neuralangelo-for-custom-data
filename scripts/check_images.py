@@ -23,4 +23,4 @@ def check_images(directory):
                 
     print(f"Corrupted Images: {corrupted_images} \n Valid Images: {valid_images}")
 
-check_images('../datasets/Spade_ds2/images')
+check_images('datasets/Spade_ds2/images')
