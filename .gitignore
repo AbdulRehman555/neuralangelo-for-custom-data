@@ -5,7 +5,7 @@ custom_assets/prod_assets_jpgs
 
 datasets/
 logs/
-lego.mp4
+tests/
 projects/neuralangelo/configs/custom/*
 
 checkpoints

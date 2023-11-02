@@ -6,7 +6,7 @@ RESOLUTION=1024
 BLOCK_RES=128
 
 PARENT_DIRECTORY="custom_assets/assets"
-IMAGE_FORMAT="heif" # OPTIONS: 'jpg', 'heif'
+IMAGE_FORMAT="jpg" # OPTIONS: 'jpg', 'heif'
 
 for folder in "$PARENT_DIRECTORY"/*; do
         if [ -d "$folder" ]; then
@@ -25,7 +25,7 @@ for folder in "$PARENT_DIRECTORY"/*; do
             if [ "$1" = "preparation" ]; then        
                 echo "Performing preparation... $folder_name"
 
-                python3 copy_input_images.py "$SOURCE_FOLDER" "$DESTINATION_FOLDER" "$IMAGE_FORMAT"
+                python3 scripts/copy_input_images.py "$SOURCE_FOLDER" "$DESTINATION_FOLDER" "$IMAGE_FORMAT"
                 bash projects/neuralangelo/scripts/run_colmap.sh "$DATA_PATH"
                 python3 projects/neuralangelo/scripts/convert_data_to_json.py --data_dir "$DATA_PATH" --scene_type "$SCENE_TYPE"
                 python3 projects/neuralangelo/scripts/generate_config.py --sequence_name "$SEQUENCE" --data_dir "$DATA_PATH" --scene_type "$SCENE_TYPE"
@@ -43,6 +43,6 @@ for folder in "$PARENT_DIRECTORY"/*; do
                 echo "Invalid argument. Please provide either 'preparation' or 'training'."
             fi
         fi
-        # break
+        break
 done
 
